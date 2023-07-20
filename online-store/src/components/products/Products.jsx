@@ -60,8 +60,6 @@ const Products = () => {
 
             <br />
 
-
-
             <div className='row'>
                 {productList.length > 0 ? productList.map((product) => {
                     return (
