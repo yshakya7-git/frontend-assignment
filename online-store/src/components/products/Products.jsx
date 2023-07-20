@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
 
 const Products = () => {
     const [productList, setProductList] = useState([]);
     const [tempDataList, setTempDataList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    // const [filter, setFilter] = useState(productList);
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/`)
@@ -12,10 +14,27 @@ const Products = () => {
                 setProductList(response.data);
                 setTempDataList(response.data);
                 setIsLoading(false);
-                console.log(response.data)
+                console.log(response.data);
 
             });
     }, []);
+
+    const searchProduct = (query) => {
+        if (query === '') {
+            setTempDataList(tempDataList);
+        } else {
+            const filterProductList = productList.filter((product) => {
+                product.title = product.title === null ? '' : product.title;
+                return product.title.includes(query);
+            });
+            setProductList(filterProductList);
+        }
+    }
+
+    // const filterProduct =(cate)=>{
+    //     const updateList= productList.filter((n)=> n.categories === cate);
+    //     setFilter(updateList);
+    // }
 
     return (
         <div className='container my-5 py-5'>
@@ -26,12 +45,21 @@ const Products = () => {
                 </div>
             </div>
 
-            <div className="buttons d-flex justify-content-center mb-5 pb-5">
-                <button className='btn btn-outline-dark me-2'>All</button>
-                <button className='btn btn-outline-dark me-2'>Men's Clothing</button>
-                <button className='btn btn-outline-dark me-2'>Women's Clothing</button>
-                <button className='btn btn-outline-dark me-2'>Electronics</button>
-            </div>
+            {/* <div className="buttons d-flex justify-content-center mb-5 pb-5">
+                <button className='btn btn-outline-dark me-2' onClick={()=> setFilter(productList)}>All</button>
+                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct("men's clothing")}>Men's Clothing</button>
+                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct('womens clothing')}>Women's Clothing</button>
+                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct('accessories')}>Accessories</button>
+                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct('electronics')}>Electronics</button> */}
+
+
+            <form className="d-flex" role="search">
+                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => searchProduct(e.target.value)} />
+                <button className="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <br />
+
 
 
             <div className='row'>
