@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Skeleton from 'react-loading-skeleton';
+// import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const Products = () => {
     const [productList, setProductList] = useState([]);
     const [tempDataList, setTempDataList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     // const [filter, setFilter] = useState(productList);
-
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/`)
             .then((response) => {

@@ -2,9 +2,12 @@ import React from 'react'
 // import './navbar.scss'
 import { NavLink } from 'react-router-dom'
 import {FaCartPlus} from 'react-icons/fa'
+import {useSelector} from 'react-redux'
 
 
 const Navbar = () => {
+
+    const state = useSelector((state) => state.HandleCart);
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
@@ -24,8 +27,8 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="cart">
-                    <NavLink className="btn btn-outline-dark ms-2" to="/products">
-                        <FaCartPlus></FaCartPlus>Cart(0)</NavLink>
+                    <NavLink className="btn btn-outline-dark ms-2" to="/cart">
+                        <FaCartPlus></FaCartPlus>Cart({state.length})</NavLink>
                     
                     </div>
                     
