@@ -1,6 +1,7 @@
 import React from 'react'
 // import './navbar.scss'
 import { NavLink } from 'react-router-dom'
+import {FaCartPlus} from 'react-icons/fa'
 
 
 const Navbar = () => {
@@ -22,6 +23,13 @@ const Navbar = () => {
                             </li>
                         </ul>
                     </div>
+                    <div className="cart">
+                    <NavLink className="btn btn-outline-dark ms-2" to="/products">
+                        <FaCartPlus></FaCartPlus>Cart(0)</NavLink>
+                    
+                    </div>
+                    
+
                 </div>
             </nav>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
+import { NavLink } from 'react-router-dom';
 
 const Products = () => {
     const [productList, setProductList] = useState([]);
@@ -79,7 +80,7 @@ const Products = () => {
                                     {product.description ? product.description.substring(0, 100) : 'products'}
                                     <br />
                                     <br />
-                                    <a href="" className='btn btn-outline-dark'>Buy Now</a>
+                                    <NavLink to={`/products/${product.id}`} className='btn btn-outline-dark'>Buy Now</NavLink>
                                 </div>
 
                             </div>
