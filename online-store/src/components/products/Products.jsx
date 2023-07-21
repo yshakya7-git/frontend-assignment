@@ -11,6 +11,7 @@ const Products = () => {
     const [isLoading, setIsLoading] = useState(true);
     // const [filter, setFilter] = useState(productList);
     useEffect(() => {
+        document.title = "Product Page";
         axios.get(`https://fakestoreapi.com/products/`)
             .then((response) => {
                 setProductList(response.data);
@@ -22,43 +23,25 @@ const Products = () => {
     }, []);
 
     const searchProduct = (query) => {
-        if (query === '') {
+        if (query === " ") {
             setTempDataList(tempDataList);
         } else {
             const filterProductList = productList.filter((product) => {
-                product.title = product.title === null ? '' : product.title;
+                product.title = product.title === null ? 'images' : product.title;
                 return product.title.includes(query);
             });
             setProductList(filterProductList);
         }
     }
 
-    // const filterProduct =(cate)=>{
-    //     const updateList= productList.filter((n)=> n.categories === cate);
-    //     setFilter(updateList);
-    // }
-
     return (
         <div className='container my-5 py-5'>
-            <div className='row'>
-                <div className='col-12 mb-5'>
-                    <h3 className='display-6 fw-bolder text-center'>Products List</h3>
-                    <hr />
-                </div>
-            </div>
+            <h3 className='display-6 fw-bolder text-center'>Products List</h3>
+            <br />
 
-            {/* <div className="buttons d-flex justify-content-center mb-5 pb-5">
-                <button className='btn btn-outline-dark me-2' onClick={()=> setFilter(productList)}>All</button>
-                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct("men's clothing")}>Men's Clothing</button>
-                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct('womens clothing')}>Women's Clothing</button>
-                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct('accessories')}>Accessories</button>
-                <button className='btn btn-outline-dark me-2' onClick={()=> filterProduct('electronics')}>Electronics</button> */}
-
-
-            <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => searchProduct(e.target.value)} />
-                <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <center>
+                    <input style={{ height: "40px", width: "50%", borderRadius: "10px" }} type="search" placeholder="Search Product" onChange={(e) => searchProduct(e.target.value)} />
+            </center>
 
             <br />
 
