@@ -1,13 +1,11 @@
-import React from 'react'
-// import './navbar.scss'
-import { NavLink } from 'react-router-dom'
-import {FaCartPlus} from 'react-icons/fa'
-import {useSelector} from 'react-redux'
-
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import {FaCartPlus} from 'react-icons/fa';
+import { useCartCounter } from '../../contexts/CartCounterContext';
 
 const Navbar = () => {
-
-    const state = useSelector((state) => state.HandleCart);
+    const { productOnCart } = useCartCounter();
+    console.log(productOnCart,'productOnCart')
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
@@ -19,7 +17,7 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+                                <NavLink className="nav-link active fw-bold" aria-current="page" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/products">Products</NavLink>
@@ -27,12 +25,9 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="cart">
-                    <NavLink className="btn btn-outline-dark ms-2" to="/cart">
-                        <FaCartPlus></FaCartPlus>Cart({state.length})</NavLink>
-                    
+                    <NavLink className="btn btn-outline-danger ms-2" to="/">
+                        <FaCartPlus></FaCartPlus>Cart({productOnCart.length})</NavLink>
                     </div>
-                    
-
                 </div>
             </nav>
         </div>

@@ -4,26 +4,24 @@ import Navbar from './components/navbar/Navbar';
 import ProductDetails from './components/products/ProductDetails';
 import Products from './components/products/Products';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import Store from './components/redux/store/Store';
-import Cart from './components/card/Cart';
+import { CartCounterProvider } from './contexts/CartCounterContext';
+import { QueryClientProvider, QueryClient } from 'react-query';
 
+const queryClient = new QueryClient();
 function App() {
   return (
-    <>
-      <Router>
-        <Provider store={Store}>
+    <QueryClientProvider client={queryClient}>
+      <CartCounterProvider>
+        <Router>
           <Navbar />
           <Routes>
             <Route exact path="/" element={<Homepage />} />
             <Route exact path="/products" element={<Products />} />
             <Route exact path="/products/:id" element={<ProductDetails />} />
-            <Route exact path="/cart" element={<Cart />} />
           </Routes>
-        </Provider>
-
-      </Router >
-    </>
+        </Router >
+      </CartCounterProvider>
+    </QueryClientProvider>
   );
 }
 

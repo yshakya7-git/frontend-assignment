@@ -4,19 +4,32 @@ import { useParams } from 'react-router'
 import { AiFillStar } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useDispatch } from 'react-redux'
-import { addCart } from '../redux/action/AddCart'
+import { useCartCounter } from '../../contexts/CartCounterContext'
+
+const Loading = () => {
+    return (
+        <>
+            <div className="col-md-6">
+                <Skeleton height={400} />
+            </div>
+            <div className="col-md-6" style={{ lineHeight: 2 }}>
+                <Skeleton height={50} width={300} />
+                <Skeleton height={75} />
+                <Skeleton height={25} width={150} />
+                <Skeleton height={50} />
+                <Skeleton height={150} />
+                <Skeleton height={50} width={100} />
+                <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
+            </div>
+        </>
+    )
+}
 
 const ProductDetails = () => {
+    const { productOnCart, updateProductOnCart } = useCartCounter()
     const { id } = useParams();
     const [productList, setProductList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const dispatch = useDispatch();
-    const addProduct = (productList) => {
-        dispatch(addCart(productList));
-        console.log(addProduct);
-    }
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -28,24 +41,7 @@ const ProductDetails = () => {
             });
     }, [id]);
 
-    const Loading = () => {
-        return (
-            <>
-                <div className="col-md-6">
-                    <Skeleton height={400} />
-                </div>
-                <div className="col-md-6" style={{ lineHeight: 2 }}>
-                    <Skeleton height={50} width={300} />
-                    <Skeleton height={75} />
-                    <Skeleton height={25} width={150} />
-                    <Skeleton height={50} />
-                    <Skeleton height={150} />
-                    <Skeleton height={50} width={100} />
-                    <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
-                </div>
-            </>
-        )
-    }
+    
 
     const ListProducts = () => {
         return (
@@ -64,14 +60,13 @@ const ProductDetails = () => {
                         ${productList.price}
                     </h3>
                     <p className="description">{productList.description}</p>
-                    <NavLink className='btn btn-outline-dark px-2'
-                        onClick={() => dispatch(addProduct(productList))}>
+                    <button className='btn btn-outline-danger px-2' onClick={() => updateProductOnCart([...productOnCart, productList])}>
                         Add to Cart
-                    </NavLink>
-                    <NavLink to='/cart' className='btn btn-dark ms-2'>
+                    </button>
+                    <NavLink to='/cart' className='btn btn-success ms-2'>
                         View Cart
                     </NavLink>
-                    <NavLink to='/products' className='btn btn-outline-dark ms-2'>
+                    <NavLink to='/products' className='btn btn-primary ms-2'>
                         Back
                     </NavLink>
                 </div>

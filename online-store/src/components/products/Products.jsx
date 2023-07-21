@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
 
 const Products = () => {
     const [productList, setProductList] = useState([]);
-    const [tempDataList, setTempDataList] = useState([]);
+    const [displayProductList, setDisplayProductList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    // const [filter, setFilter] = useState(productList);
+
     useEffect(() => {
-        document.title = "Product Page";
+        document.title = "Online Store";
         axios.get(`https://fakestoreapi.com/products/`)
             .then((response) => {
                 setProductList(response.data);
-                setTempDataList(response.data);
+                setDisplayProductList(response.data);
                 setIsLoading(false);
                 console.log(response.data);
 
@@ -23,33 +21,33 @@ const Products = () => {
     }, []);
 
     const searchProduct = (query) => {
-        if (query === " ") {
-            setTempDataList(tempDataList);
-        } else {
+        if (!!query) {
             const filterProductList = productList.filter((product) => {
-                product.title = product.title === null ? 'images' : product.title;
-                return product.title.includes(query);
+                return product.title.includes(query) || product.description.includes(query);
             });
-            setProductList(filterProductList);
+            setDisplayProductList(filterProductList);
+        } else {
+            setProductList(displayProductList);
         }
     }
 
+    console.log(productList,'productList');
     return (
-        <div className='container my-5 py-5'>
+        <div className='container py-5'>
             <h3 className='display-6 fw-bolder text-center'>Products List</h3>
             <br />
 
             <center>
-                    <input style={{ height: "40px", width: "50%", borderRadius: "10px" }} type="search" placeholder="Search Product" onChange={(e) => searchProduct(e.target.value)} />
+                <input style={{ height: "40px", width: "50%", borderRadius: "10px" }} type="search" placeholder="Search Product" onChange={(e) => searchProduct(e.target.value)} />
             </center>
 
             <br />
 
             <div className='row'>
-                {productList.length > 0 ? productList.map((product) => {
+                {!!displayProductList.length ? displayProductList.map((product) => {
                     return (
                         <div className="col-md-3 mb-4">
-                            <div className="card" key={product.id}>
+                            <div className="card" key={product.id} height="250px" width="250px">
                                 <img src={product.image}
                                     style={{ height: "250px", width: "250px", objectFit: "cover" }}
                                     alt={product.description}
@@ -64,7 +62,9 @@ const Products = () => {
                                     {product.description ? product.description.substring(0, 100) : 'products'}
                                     <br />
                                     <br />
-                                    <NavLink to={`/products/${product.id}`} className='btn btn-outline-dark'>Buy Now</NavLink>
+                                    <center>
+                                        <NavLink to={`/products/${product.id}`} className='btn btn-danger'>Buy Now</NavLink>
+                                    </center>
                                 </div>
 
                             </div>
