@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 
 const Products = () => {
     const [productList, setProductList] = useState([]);
     const [displayProductList, setDisplayProductList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        document.title = "Online Store";
-        axios.get(`https://fakestoreapi.com/products/`)
-            .then((response) => {
-                setProductList(response.data);
-                setDisplayProductList(response.data);
-                setIsLoading(false);
-                console.log(response.data);
+    const { isLoading, error } = useQuery({
+        queryKey: ['repoData'],
+        queryFn: () =>
+            axios
+                .get(`https://fakestoreapi.com/products/`)
+                .then((res) => {
+                    setProductList(res.data)
+                    setDisplayProductList(res.data)
+                }
+                ),
+    });
 
-            });
-    }, []);
+    if (isLoading) return 'Loading...'
+
+    if (error) return 'An error has occurred: ' + error.message
 
     const searchProduct = (query) => {
         if (!!query) {
@@ -31,7 +35,7 @@ const Products = () => {
         }
     }
 
-    console.log(productList,'productList');
+    console.log(productList, 'productList');
     return (
         <div className='container py-5'>
             <h3 className='display-6 fw-bolder text-center'>Products List</h3>

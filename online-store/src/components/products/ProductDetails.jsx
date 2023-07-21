@@ -5,6 +5,7 @@ import { AiFillStar } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useCartCounter } from '../../contexts/CartCounterContext'
+import { useQuery } from 'react-query'
 
 const Loading = () => {
     return (
@@ -29,20 +30,21 @@ const ProductDetails = () => {
     const { productOnCart, updateProductOnCart } = useCartCounter()
     const { id } = useParams();
     const [productList, setProductList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        axios.get(`https://fakestoreapi.com/products/${id}`)
-            .then((response) => {
-                setProductList(response.data);
-                setIsLoading(false);
-                console.log(response.data);
+    const { isLoading, error } = useQuery({
+        queryKey: ['repoData'],
+        queryFn: () =>
+            axios
+                .get(`https://fakestoreapi.com/products/${id}`)
+                .then((res) => {
+                    setProductList(res.data)
+                }
+                ),
+    });
 
-            });
-    }, [id]);
+    if (isLoading) return 'Loading...'
 
-    
-
+    if (error) return 'An error has occurred: ' + error.message
     const ListProducts = () => {
         return (
             <>
