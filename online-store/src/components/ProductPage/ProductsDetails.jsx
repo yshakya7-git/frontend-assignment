@@ -7,7 +7,7 @@ import { useCartCounter } from '../../contexts/CartCounterContext'
 import { useQuery } from 'react-query'
 
 
-const ProductDetails = () => {
+const ProductsDetails = () => {
     const { productOnCart, updateProductOnCart } = useCartCounter()
     const { id } = useParams();
     const [productList, setProductList] = useState([]);
@@ -70,4 +70,4 @@ const ProductDetails = () => {
     )
 }
 
-export default ProductDetails
+export default ProductsDetails;

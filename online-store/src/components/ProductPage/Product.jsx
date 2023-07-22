@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import DisplayProducts from '../DisplayProducts/DisplayProducts';
 
 
-const Products = () => {
+const Product = () => {
     const [productList, setProductList] = useState([]);
     const [displayProductList, setDisplayProductList] = useState([]);
 
@@ -57,4 +57,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default Product
