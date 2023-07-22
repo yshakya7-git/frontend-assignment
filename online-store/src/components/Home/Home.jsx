@@ -2,7 +2,7 @@ import React from 'react'
 import banner from '../../assets/b1.avif'
 import { NavLink } from 'react-router-dom'
 
-const Homepage = () => {
+const Home = () => {
     return (
         <div className='home'>
             <div className="card text-bg-dark">
@@ -20,4 +20,4 @@ const Homepage = () => {
     )
 }
 
-export default Homepage
+export default Home

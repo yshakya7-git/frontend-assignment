@@ -1,30 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router'
 import { AiFillStar } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
-import Skeleton from 'react-loading-skeleton'
 import { useCartCounter } from '../../contexts/CartCounterContext'
 import { useQuery } from 'react-query'
 
-const Loading = () => {
-    return (
-        <>
-            <div className="col-md-6">
-                <Skeleton height={400} />
-            </div>
-            <div className="col-md-6" style={{ lineHeight: 2 }}>
-                <Skeleton height={50} width={300} />
-                <Skeleton height={75} />
-                <Skeleton height={25} width={150} />
-                <Skeleton height={50} />
-                <Skeleton height={150} />
-                <Skeleton height={50} width={100} />
-                <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
-            </div>
-        </>
-    )
-}
 
 const ProductDetails = () => {
     const { productOnCart, updateProductOnCart } = useCartCounter()
@@ -42,12 +23,27 @@ const ProductDetails = () => {
                 ),
     });
 
-    if (isLoading) return 'Loading...'
+    if (isLoading) { return 'Loading...' }
 
-    if (error) return 'An error has occurred: ' + error.message
-    const ListProducts = () => {
-        return (
-            <>
+    if (error) { return 'An error has occurred: ' + error.message }
+
+    const handleAddToCart = (product) => {
+        let currentProductsOnCart = productOnCart;
+        if (product.id) {
+            let checkProductDetails = productOnCart.find(productData => +productData.id === +product.id)
+            if (checkProductDetails?.id) {
+                const findProductIndex = productOnCart.findIndex(productData => +productData.id === +product.id);
+                currentProductsOnCart[findProductIndex] = { ...product, quantity: checkProductDetails.quantity + 1 }
+            } else {
+                currentProductsOnCart = [...productOnCart, { ...product, quantity: 1 }]
+            }
+        }
+        updateProductOnCart(currentProductsOnCart)
+
+    }
+    return (
+        <div className="container py-5">
+            <div className="row py=4">
                 <div className="col-md-6">
                     <img src={productList.image} alt={productList.image} height="350px" width="350px" />
                 </div>
@@ -56,32 +52,18 @@ const ProductDetails = () => {
                     <h1 className="display-5">{productList.title}</h1>
                     <p className="rates fw-bolder"><br />
                         Rating{productList.rating && productList.rating.rate}
-                        <AiFillStar></AiFillStar>
+                        <AiFillStar />
                     </p>
                     <h3 className="display-6 fw-bold my-4">
                         ${productList.price}
                     </h3>
                     <p className="description">{productList.description}</p>
-                    <button className='btn btn-outline-danger px-2' onClick={() => updateProductOnCart([...productOnCart, productList])}>
+                    <button className='btn btn-outline-danger px-2' onClick={() => handleAddToCart(productList)}>
                         Add to Cart
                     </button>
-                    <NavLink to='/cart' className='btn btn-success ms-2'>
-                        View Cart
+                    <NavLink to='/products' className='btn btn-success ms-2'>
+                        View Products
                     </NavLink>
-                    <NavLink to='/products' className='btn btn-primary ms-2'>
-                        Back
-                    </NavLink>
-                </div>
-            </>
-        )
-    }
-
-
-    return (
-        <div>
-            <div className="container py-5">
-                <div className="row py=4">
-                    {isLoading ? <Loading /> : <ListProducts />}
                 </div>
             </div>
         </div>

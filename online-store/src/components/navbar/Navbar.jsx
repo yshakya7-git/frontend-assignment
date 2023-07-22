@@ -25,7 +25,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="cart">
-                    <NavLink className="btn btn-outline-danger ms-2" to="/">
+                    <NavLink className="btn btn-outline-danger ms-2" to={`/carts/${5}`}>
                         <FaCartPlus></FaCartPlus>Cart({productOnCart.length})</NavLink>
                     </div>
                 </div>
