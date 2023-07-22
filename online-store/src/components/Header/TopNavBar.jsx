@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {FaCartPlus} from 'react-icons/fa';
 import { useCartCounter } from '../../contexts/CartCounterContext';
 
-const Navbar = () => {
+const TopNavBar = () => {
     const { productOnCart } = useCartCounter();
     console.log(productOnCart,'productOnCart')
     return (
@@ -34,4 +34,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default TopNavBar
