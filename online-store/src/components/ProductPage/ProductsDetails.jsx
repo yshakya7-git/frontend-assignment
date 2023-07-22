@@ -58,7 +58,7 @@ const ProductsDetails = () => {
                         ${productList.price}
                     </h3>
                     <p className="description">{productList.description}</p>
-                    <button className='btn btn-outline-danger px-2' onClick={() => handleAddToCart(productList)}>
+                    <button className='btn btn-danger px-2' onClick={() => handleAddToCart(productList)}>
                         Add to Cart
                     </button>
                     <NavLink to='/products' className='btn btn-success ms-2'>

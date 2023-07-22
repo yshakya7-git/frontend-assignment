@@ -28,6 +28,7 @@ const CartPages = () => {
 
     return (
         <>
+        <div className="container">
             {productOnCart.length > 0 &&
                 <div className="row">
                     {productOnCart.map((product, idx) => (
@@ -40,9 +41,12 @@ const CartPages = () => {
             {productOnCart.length === 0 && <><div className="d-flex align-items-center justify-content-center vh-100">
                 <div className="card" height="250px" width="250px">
                     No Data on cart. Please add data to Cart
-                    <NavLink to={`/products`} className="btn btn-success">Go back to Products</NavLink>
+                    <center>
+                    <NavLink to={`/products`} className="btn btn-danger">Go back to Products</NavLink>
+                    </center>
                 </div>
             </div></>}
+            </div>
         </>
     )
 }

@@ -18,7 +18,7 @@ function DisplayProducts({ product, isCart = false }) {
     // }
     return (
         <div className="col-md-3 mb-4">
-            <div className="card" height="250px" width="250px">
+            <div className="card h-100 text-center p-4" height="250px" width="250px">
                 <img src={product?.image}
                     style={{ height: "250px", width: "250px", objectFit: "cover" }}
                     alt={product.description ?? ''}
@@ -27,23 +27,27 @@ function DisplayProducts({ product, isCart = false }) {
                     <h5 className="card-title">
                         {product.title ?? ''}
                     </h5>
-                    <p className="card-text">
+                    <p className="card-text ms-2">
                         ${product.price}
                     </p>
-                    {product.description ? product.description.substring(0, 100) : 'products'}
-                    <br />
-                    <br />
+                    <p className='card-text'>{product.description ? product.description.substring(0, 100) : 'products'}</p>
+
+                </div>
+                <div>
                     {!isCart && <center>
                         <NavLink to={`/products/${product.id}`} className='btn btn-danger'>Buy Now</NavLink>
                     </center>}
-                    {isCart && <div className="d-flex justify-content-between">
+                    {isCart && <center> 
+                        {/* <div className="d-flex justify-content-between"> */}
                         {/* <div className="d-flex justify-content-between">
                             <button onClick={() => productCountHandler(product, 'add')}>+</button>
                             <p>{product.quantity ?? 0}</p>
                             <button onClick={() => productCountHandler(product, 'substract')}>-</button>
                         </div> */}
-                        <NavLink to={`/products`} className="btn btn-success">Checkout</NavLink>
-                    </div>}
+                        <NavLink to={`/products`} className="btn btn-danger">Checkout</NavLink>
+                    {/* </div> */}
+                    </center>
+                    }
 
 
                 </div>
