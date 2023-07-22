@@ -3,7 +3,7 @@ README for ONLINE STORE PROJECT
 The Online Store project is a web application designed to showcase an e-commerce store. The goal of this project is to demonstrate how React can be used to build dynamic and interactive user interfaces for online shopping platforms. Users can browse products, view details, add items to the cart, and proceed to checkout.
 
 Live Demo:
-
+https://yunika-online-store.netlify.app/
 
 Technologies Used:
 1. React.js
