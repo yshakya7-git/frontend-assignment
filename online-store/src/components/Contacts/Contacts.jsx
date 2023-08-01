@@ -10,12 +10,13 @@ const Contacts = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
+        // email sending 
         emailjs.sendForm(
             'service_73iae6b',
             'template_e4c03jm',
             form.current,
             'l1Wzka_six5DNkzSB'
-            )
+        )
             .then((result) => {
                 console.log(result.text);
                 console.log('message sent');
@@ -35,7 +36,6 @@ const Contacts = () => {
                         <TextField name='name' placeholder="Name" />
                         <label htmlFor="">Email : </label>
                         <TextField name='email' placeholder="Email" />
-                        {/* <input type="text" name='email' onChange={handleChange} /> {errors.email}<br /> */}
                         <label htmlFor="">Message : </label>
                         <TextField type="text" placeholder="Send Message" name='message' />
                         <input type="submit" /> <br />
