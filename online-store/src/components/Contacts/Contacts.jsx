@@ -3,12 +3,13 @@ import { Formik } from 'formik'
 import { FormmSchema } from '../../validations/FormSchema'
 import TextField from '../../validations/TextField'
 import emailjs from '@emailjs/browser'
+// import './contacts.scss'
 
 const Contacts = () => {
     const form = useRef();
 
     const sendEmail = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         // email sending 
         emailjs.sendForm(
@@ -27,22 +28,44 @@ const Contacts = () => {
 
     return (
         <div>
-            <Formik
-                initialValues={{ name: "", email: "", message: "" }}
-                validationSchema={FormmSchema}>
-                {({ error, handleChange, handleSubmit, values }) => {
-                    return <form ref={form} onSubmit={sendEmail}>
-                        <label htmlFor="">Name : </label>
-                        <TextField name='name' placeholder="Name" />
-                        <label htmlFor="">Email : </label>
-                        <TextField name='email' placeholder="Email" />
-                        <label htmlFor="">Message : </label>
-                        <TextField type="text" placeholder="Send Message" name='message' />
-                        <input type="submit" /> <br />
-                    </form>
-                }}
 
-            </Formik>
+            <div className='container-contact'>
+                <h2>Feel free to contact us </h2>
+
+                <Formik
+                    initialValues={{ name: "", email: "", message: "" }}
+                    validationSchema={FormmSchema}>
+                    {({ error, handleChange, handleSubmit, values }) => {
+                        return (
+                            <div className='box-contact'>
+                                <span className='borderLine'></span>
+                                <form ref={form} onSubmit={sendEmail}>
+                                    <div className="inputBox">
+                                        <span>Name</span>
+                                        <TextField name='name' />
+                                    </div>
+                                    <div className="inputBox">
+                                        <span>Email</span>
+                                        <TextField name='email' />
+
+                                    </div>
+                                    <div className="inputBox">
+                                        <span span>Message</span>
+                                        <TextField type="text" name='message' />
+                                    </div>
+                                    <center>
+                                        <input type="submit" />
+                                    </center>
+
+                                </form>
+                            </div>
+
+
+                        )
+                    }}
+
+                </Formik>
+            </div>
         </div>
     )
 }
