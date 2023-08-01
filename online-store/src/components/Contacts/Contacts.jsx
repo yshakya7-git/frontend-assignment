@@ -3,7 +3,6 @@ import { Formik } from 'formik'
 import { FormmSchema } from '../../validations/FormSchema'
 import TextField from '../../validations/TextField'
 import emailjs from '@emailjs/browser'
-// import './contacts.scss'
 
 const Contacts = () => {
     const form = useRef();
@@ -28,10 +27,8 @@ const Contacts = () => {
 
     return (
         <div>
-
             <div className='container-contact'>
                 <h2>Feel free to contact us </h2>
-
                 <Formik
                     initialValues={{ name: "", email: "", message: "" }}
                     validationSchema={FormmSchema}>

@@ -39,8 +39,6 @@ function DisplayProducts({ product, isCart = false }) {
 
                 {!isCart && <center>
                     <NavLink to={`/products/${product.id}`} className='btn btn-danger'>Buy Now</NavLink>
-                    <button className='btn btn-danger'>Add to Cart</button>
-
                 </center>}
                 {isCart && <center>
                     <div className="d-flex justify-content-between">
