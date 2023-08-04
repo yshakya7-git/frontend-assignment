@@ -8,6 +8,9 @@ import TopNavBar from './components/Header/TopNavBar';
 import ProductsDetails from './components/ProductPage/ProductsDetails';
 import Product from './components/ProductPage/Product';
 import Contacts from './components/Contacts/Contacts';
+import Login from './components/Login/Login';
+import AddProducts from './components/AddProducts/AddProducts';
+import CreateProduct from './components/AddProducts/CreateProduct';
 
 
 
@@ -24,6 +27,9 @@ function App() {
             <Route exact path="/products/:id" element={<ProductsDetails />} />
             <Route exact path="/carts/:id" element={<CartPages />} />
             <Route exact path="/contacts" element={<Contacts />} />
+            <Route exact path="/add" element={<AddProducts />} />
+            <Route exact path="/create" element={<CreateProduct />} />
+            <Route exact path="/login" element={<Login />} />
           </Routes>
         </Router >
       </CartCounterProvider>

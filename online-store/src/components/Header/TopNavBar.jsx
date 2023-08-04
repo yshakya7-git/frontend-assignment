@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {FaCartPlus} from 'react-icons/fa';
+import {BiLogIn} from 'react-icons/bi';
 import { useCartCounter } from '../../contexts/CartCounterContext';
 
 const TopNavBar = () => {
@@ -20,16 +21,22 @@ const TopNavBar = () => {
                                 <NavLink className="nav-link active fw-bold" aria-current="page" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/products">Products</NavLink>
+                                <NavLink className="nav-link" to="/add">Products </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/products">View Products</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/contacts">Contacts</NavLink>
                             </li>
+                           
                         </ul>
                     </div>
                     <div className="cart">
                     <NavLink className="btn btn-outline-danger ms-2" to={`/carts/${5}`}>
                         <FaCartPlus></FaCartPlus>Cart({productOnCart.length})</NavLink>
+                    <NavLink className="btn btn-outline-danger ms-2" to={'/login'}>
+                        <BiLogIn></BiLogIn>Login</NavLink>
                     </div>
                 </div>
             </nav>
