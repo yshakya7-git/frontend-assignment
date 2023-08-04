@@ -1,11 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
+import { deleteProducts } from '../../redux/ProductReducer';
 
 const AddProducts = () => {
 
     const products = useSelector((state)=> state.products);
-    console.log(products);
+    const deleteDispatch = useDispatch();
+    
+    const handleOnDelete =(id) =>{
+        deleteDispatch(deleteProducts({id: id}));
+    }
     return (
         <div>
             <h3>AddProducts Page</h3>
@@ -29,7 +34,7 @@ const AddProducts = () => {
                             <td>{product.description}</td>
                             <td>
                                 <NavLink to={`/edit/${product.id}`} className='btn btn-primary my-3'>Edit</NavLink>
-                                <button className='btn btn-danger my-3'>Delete</button>
+                                <button onClick={()=> handleOnDelete(product.id)} className='btn btn-danger my-3'>Delete</button>
                             </td>
                         </tr>
 
