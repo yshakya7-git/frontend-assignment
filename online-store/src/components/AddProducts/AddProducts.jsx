@@ -28,7 +28,7 @@ const AddProducts = () => {
                             <td>{product.price}</td>
                             <td>{product.description}</td>
                             <td>
-                                <button className='btn btn-primary my-3'>Edit</button>
+                                <NavLink to={`/edit/${product.id}`} className='btn btn-primary my-3'>Edit</NavLink>
                                 <button className='btn btn-danger my-3'>Delete</button>
                             </td>
                         </tr>

@@ -8,9 +8,9 @@ const CreateProduct = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+
     const products = useSelector((state) => state.products);
     const productDispatch = useDispatch();
-
     const navigateProduct = useNavigate();
 
     const handleOnSubmit = (event) => {
@@ -22,8 +22,6 @@ const CreateProduct = () => {
             description
         }))
         navigateProduct('/add');
-
-
     }
     return (
         <div className='container'>

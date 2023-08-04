@@ -11,6 +11,7 @@ import Contacts from './components/Contacts/Contacts';
 import Login from './components/Login/Login';
 import AddProducts from './components/AddProducts/AddProducts';
 import CreateProduct from './components/AddProducts/CreateProduct';
+import UpdateProduct from './components/AddProducts/UpdateProduct';
 
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/contacts" element={<Contacts />} />
             <Route exact path="/add" element={<AddProducts />} />
             <Route exact path="/create" element={<CreateProduct />} />
+            <Route exact path="/edit/:id" element={<UpdateProduct />} />
             <Route exact path="/login" element={<Login />} />
           </Routes>
         </Router >
