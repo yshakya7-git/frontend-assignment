@@ -29,6 +29,9 @@ const TopNavBar = () => {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/contacts">Contacts</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/paginated">Paginated</NavLink>
+                            </li>
                            
                         </ul>
                     </div>

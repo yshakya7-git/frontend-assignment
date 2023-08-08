@@ -3,6 +3,10 @@ import { Formik } from 'formik'
 import { FormmSchema } from '../../validations/FormSchema'
 import TextField from '../../validations/TextField'
 import emailjs from '@emailjs/browser'
+import { HiMailOpen } from 'react-icons/hi'
+import { FaFacebookMessenger } from 'react-icons/fa'
+import { AiFillInstagram } from 'react-icons/ai'
+import './contacts.css'
 
 const Contacts = () => {
     const form = useRef();
@@ -26,9 +30,21 @@ const Contacts = () => {
     };
 
     return (
-        <div>
-            <div className='container-contact'>
-                <h2>Feel free to contact us </h2>
+        <div className='container-contact'>
+            <section id='contact'>
+                <center><h2>Feel free to contact us </h2></center> <br />
+                <div className='contact-icons'>
+                    <HiMailOpen className='contact-card-icon' />
+                    <a href="https://mail.google.com/mail/u/0/#inbox" target='_blank'></a>
+
+                    <FaFacebookMessenger className='contact-card-icon' />
+                    <a href="https://m.me/yunika.shakya.5" target='_blank'></a>
+
+                    <AiFillInstagram className='contact-card-icon' />
+                    <a href="https://www.instagram.com/_yunika_shakya/" target='_blank'></a>
+                </div>
+
+
                 <Formik
                     initialValues={{ name: "", email: "", message: "" }}
                     validationSchema={FormmSchema}>
@@ -62,8 +78,9 @@ const Contacts = () => {
                     }}
 
                 </Formik>
-            </div>
-        </div>
+            </section >
+        </div >
+
     )
 }
 

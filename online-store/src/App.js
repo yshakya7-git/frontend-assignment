@@ -12,6 +12,9 @@ import Login from './components/Login/Login';
 import AddProducts from './components/AddProducts/AddProducts';
 import CreateProduct from './components/AddProducts/CreateProduct';
 import UpdateProduct from './components/AddProducts/UpdateProduct';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import ProductPaginated from './components/ProductAction/ProductPaginated';
+import Paginated from './components/ProductAction/Paginated';
 
 
 
@@ -32,9 +35,11 @@ function App() {
             <Route exact path="/create" element={<CreateProduct />} />
             <Route exact path="/edit/:id" element={<UpdateProduct />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/paginated" element={<Paginated />} />
           </Routes>
         </Router >
       </CartCounterProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

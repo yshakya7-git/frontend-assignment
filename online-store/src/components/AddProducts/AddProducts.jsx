@@ -12,9 +12,11 @@ const AddProducts = () => {
         deleteDispatch(deleteProducts({id: id}));
     }
     return (
-        <div>
+        <div className='container'>
+            <br />
             <h3>AddProducts Page</h3>
-            <NavLink className="btn btn-success ms-2" to="/create">Create Product</NavLink>
+            <br />
+            <NavLink className="btn btn-success ms-2" to="/create">Add Product</NavLink>
             <table className='table'>
                 <thead>
                     <tr>
@@ -33,7 +35,7 @@ const AddProducts = () => {
                             <td>{product.price}</td>
                             <td>{product.description}</td>
                             <td>
-                                <NavLink to={`/edit/${product.id}`} className='btn btn-primary my-3'>Edit</NavLink>
+                                <NavLink to={`/edit/${product.id}`} className='btn btn-primary ms-2'>Edit</NavLink> 
                                 <button onClick={()=> handleOnDelete(product.id)} className='btn btn-danger my-3'>Delete</button>
                             </td>
                         </tr>

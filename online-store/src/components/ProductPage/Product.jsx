@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import DisplayProducts from '../DisplayProducts/DisplayProducts';
+import ReactPaginate from 'react-paginate';
 
 
 const Product = () => {
@@ -35,6 +36,8 @@ const Product = () => {
         }
     }
 
+    
+
     return (
         <div className='container py-5'>
             <h3 className='display-6 fw-bolder text-center'>Products List</h3>
@@ -52,7 +55,10 @@ const Product = () => {
                         <DisplayProducts key={product.id} product={product} />
                     )
                 }) : isLoading ? "Loading..." : 'No Products Found!!!'}
+
             </div>
+
+           
         </div>
     )
 }
