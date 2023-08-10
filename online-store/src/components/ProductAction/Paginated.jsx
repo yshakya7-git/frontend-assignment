@@ -1,32 +1,36 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
-import { useQuery } from 'react-query';
 
 const Paginated = () => {
 
-    const [pageNumber, setPageNumber] = useState("");
+    const [pageNumber, setPageNumber] = useState();
     const [productData, setProductData] = useState("");
+    const[pageTotal, setPageTotal] = useState();
 
     const handlePageClick = (data) => {
         setPageNumber(data.selected);
 
     }
 
-    const { isLoading, error } = useQuery(
-        ['repoData'], () =>
-        axios
-            .get(pageNumber ? `https://jsonplaceholder.typicode.com/comments?_page=${pageNumber + 1}` :
-                `https://jsonplaceholder.typicode.com/comments?_page=1`)
-            .then((res) => {
-                setProductData(res.data)
-            })
-    );
+    const fetchData = async () => {
+        await axios.get(pageNumber ? `https://jsonplaceholder.typicode.com/photos?_page=${pageNumber + 1}&_limit=10` 
+        : `https://jsonplaceholder.typicode.com/photos?_page=${pageNumber}&_limit=10`)
+        .then((res)=> setProductData(res.data))
+    };
 
-    if (isLoading) return 'Loading...'
+    useEffect(() => {
+        fetchData();
+    }, [pageNumber]);
 
-    if (error) return 'An error has occurred: ' + error.message
-
+    useEffect(()=>{
+        const fetchTotal = async () =>{
+            await axios.get('https://jsonplaceholder.typicode.com/photos')
+            .then((res)=> setPageTotal(res.data.length/10))
+        };
+        fetchTotal();
+    },[]);
+     console.log(productData)
 
     return (
         <>
@@ -36,11 +40,12 @@ const Paginated = () => {
                         {productData.map((product) => {
                             return (
                                 <div key={product.id}
-                                className='my-3 px-4 py-3'
-                                style={{width:'400px', border: "1px solid silver"}}
+                                    className='my-3 px-4 py-3'
                                 >
                                     <div>{product.id}</div>
-                                    <div>{product.email}</div>
+                                    <div>{product.title}</div>
+                                    <div>{product.url}</div>
+                                    <div>{product.thumbnailUrl}</div>
                                 </div>
                             )
                         })}
@@ -59,7 +64,7 @@ const Paginated = () => {
                 nextLabel="next"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
-                pageCount={100}
+                pageCount={pageTotal}
                 previousLabel="previous"
                 breakClassName='page-item'
                 previousClassName='page-item'
